@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<title>Guess the number!</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="app">
+   
+	<!-- View -->
+	<div class="container" ng-controller="GuessTheNumberController">
+		<div class="pull-down-div hidden-xs">
+			
+		</div>
+        <div class="row">
+           
+            <p class="well lead">Guess the number that the computer generated between 1 and 999</p>
+            <div class="col-md-6">
+                
+                <div class="input-group">
+                    <input type="number" ng-model="guess" class="form-control " placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" ng-click="verifyGuess()" type="button">Guess</button>
+                    </span>
+                </div><!-- /input-group -->
+                <div>
+                    <p ng-show="deviation < 0" class="alert alert-warning">Guess lower.</p>
+                    <p ng-show="deviation > 0" class="alert alert-warning">Guess higher.</p>
+                    <p ng-show="deviation === 0" class="alert alert-success">Congratulations! You found the number.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-info" ng-show="deviation === 0">Last 5 Guesses</div>
+                <div ng-repeat='x in lst|limitTo:-5' ng-show="deviation === 0">
+                    {{x.item}}
+                    <span ng-show="{{x.item}} < {{original}}">: Guess higher</span>
+                    <span ng-show="{{x.item}} > {{original}}">: Guess lower</span>
+                </div>
+                <div>Time taken: <timer>{{minutes}} minutes, {{seconds}} seconds.</timer></div>
+                <div><p class="text-info">Number of guesses: <span class="badge">{{noOfTries}}</span></p></div>
+
+            </div>
+
+        </div>   
+        
+
+    </div>
+    
+	
+	
+
+	<!-- Code -->	
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+	<script src="js/guess-number.controller.js"></script>
+    <script type="text/javascript" src="js/angular-timer-bower.js"></script>
+    <script type="text/javascript" src="js/angular-timer-all.min.js"></script>
+	
+	
+</body>
+</html>
